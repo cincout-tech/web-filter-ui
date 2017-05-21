@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -108,5 +109,5 @@ export default class SearchForm extends React.Component {
 }
 
 SearchForm.contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object
 };

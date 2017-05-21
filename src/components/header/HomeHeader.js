@@ -2,6 +2,8 @@
  * Created by zhaoyu on 17-5-4.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {AppBar, Avatar, TextField} from 'material-ui';
 import {spacing, typography} from 'material-ui/styles';
 import {grey100, white, lightGreen200} from 'material-ui/styles/colors';
@@ -138,7 +140,7 @@ class HomeHeader extends React.Component {
 }
 
 HomeHeader.contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object
 };
 
 export default HomeHeader;

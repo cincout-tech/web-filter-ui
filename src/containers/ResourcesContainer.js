@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import ResourcePanel from '../components/index/ResourcePanel';
 import { search } from '../actions/searchs';
+import { likeAction, viewAction } from '../actions/resources';
 
 function mapStateToProps(state, newProps) {
     console.log(state);
@@ -17,7 +18,7 @@ function mapStateToProps(state, newProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators({search}, dispatch)};
+    return {actions: bindActionCreators({search, likeAction, viewAction}, dispatch)};
 }
 
 const ResourcesContainer = connect(

@@ -32,7 +32,7 @@ export default class ResourcePanel extends React.Component {
             return (
                 <Grid fluid className="grid-margin-clear">
                     <HomeHeader searchState={searchState} search={actions.search} session={session}/>
-                    <ResourceList queryResult={searchState.queryResult}/>
+                    <ResourceList  {...this.props}/>
                     <Pagination searchState={searchState} search={actions.search}/>
                 </Grid>
             );

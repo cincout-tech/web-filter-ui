@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import { browserHistory } from 'react-router';
 import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
 import LeftDrawer from '../components/LeftDrawer';

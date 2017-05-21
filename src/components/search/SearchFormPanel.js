@@ -3,9 +3,6 @@
  */
 
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import {green200, white} from 'material-ui/styles/colors';
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
 import Header from "../header/Header";

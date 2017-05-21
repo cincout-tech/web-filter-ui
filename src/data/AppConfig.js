@@ -3,7 +3,7 @@
  */
 
 const AppConfig = {
-    feedbackUrl: "https://github.com/cincout-tech/cavia-account/issues"
+    feedbackUrl: "https://github.com/cincout-tech/web-filter-ui/issues"
 };
 
 export default AppConfig;

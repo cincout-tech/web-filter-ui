@@ -13,10 +13,10 @@ export default class ResourceList extends React.Component {
     }
 
     render() {
-        const {queryResult} = this.props;
+        const {searchState, session, actions} = this.props;
         let resourceList = [];
-        queryResult.content.map((resource, index) => {
-            resourceList.push(<Resource key={index} details={resource}/>);
+        searchState.queryResult.content.map((resource, index) => {
+            resourceList.push(<Resource key={index} resource={resource} actions={actions} session={session}/>);
         });
 
         return (
