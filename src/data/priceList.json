@@ -1,0 +1,206 @@
+[
+  {
+    "id": 1,
+    "title": "月报价",
+    "totalPrice": 299,
+    "discount": 1,
+    "serviceItems": [
+      {
+        "id": 1,
+        "name": "数据存储(30天)",
+        "description": "30天"
+      },
+      {
+        "id": 2,
+        "name": "分布式服务追踪",
+        "description": "Api方法级别"
+      },
+      {
+        "id": 3,
+        "name": "Jvm性能监控",
+        "description": "Jvm性能实时监控"
+      },
+      {
+        "id": 4,
+        "name": "应用调用拓扑",
+        "description": "分布式服务拓扑结构"
+      },
+      {
+        "id": 5,
+        "name": "技术支持",
+        "description": "电话&邮件"
+      },
+      {
+        "id": 6,
+        "name": "使用方式",
+        "description": "支持SaaS"
+      },
+      {
+        "id": 7,
+        "name": "HTTP错误统计",
+        "description": "基于HTTP CODE统计"
+      },
+      {
+        "id": 8,
+        "name": "应用性能报表",
+        "description": "提供一周内的性能报表统计功能"
+      },
+      {
+        "id": 9,
+        "name": "SQL性能分析",
+        "description": "ORM性能分析"
+      },
+      {
+        "id": 10,
+        "name": "TPS统计",
+        "description": "分钟级别TPS统计"
+      },
+      {
+        "id": 11,
+        "name": "CPU使用统计",
+        "description": "分钟级CPU信息统计"
+      },
+      {
+        "id": 12,
+        "name": "线程Thread监控",
+        "description": "分钟级线程Thread监控"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "半年报价",
+    "totalPrice": 1794,
+    "discount": 0.85,
+    "serviceItems": [
+      {
+        "id": 1,
+        "name": "数据存储(180天)",
+        "description": "180天"
+      },
+      {
+        "id": 2,
+        "name": "分布式服务追踪",
+        "description": "Api方法级别"
+      },
+      {
+        "id": 3,
+        "name": "Jvm性能监控",
+        "description": "Jvm性能实时监控"
+      },
+      {
+        "id": 4,
+        "name": "应用调用拓扑",
+        "description": "分布式服务拓扑结构"
+      },
+      {
+        "id": 5,
+        "name": "技术支持",
+        "description": "电话&邮件"
+      },
+      {
+        "id": 6,
+        "name": "使用方式",
+        "description": "支持SaaS"
+      },
+      {
+        "id": 7,
+        "name": "HTTP错误统计",
+        "description": "基于HTTP CODE统计"
+      },
+      {
+        "id": 8,
+        "name": "应用性能报表",
+        "description": "提供一周内的性能报表统计功能"
+      },
+      {
+        "id": 9,
+        "name": "SQL性能分析",
+        "description": "ORM性能分析"
+      },
+      {
+        "id": 10,
+        "name": "TPS统计",
+        "description": "分钟级别TPS统计"
+      },
+      {
+        "id": 11,
+        "name": "CPU使用统计",
+        "description": "分钟级CPU信息统计"
+      },
+      {
+        "id": 12,
+        "name": "线程Thread监控",
+        "description": "分钟级线程Thread监控"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "年报价",
+    "totalPrice": 3588,
+    "discount": 0.8,
+    "serviceItems": [
+      {
+        "id": 1,
+        "name": "数据存储(360天)",
+        "description": "360天"
+      },
+      {
+        "id": 2,
+        "name": "分布式服务追踪",
+        "description": "Api方法级别"
+      },
+      {
+        "id": 3,
+        "name": "Jvm性能监控",
+        "description": "Jvm性能实时监控"
+      },
+      {
+        "id": 4,
+        "name": "应用调用拓扑",
+        "description": "分布式服务拓扑结构"
+      },
+      {
+        "id": 5,
+        "name": "技术支持",
+        "description": "电话&邮件"
+      },
+      {
+        "id": 6,
+        "name": "使用方式",
+        "description": "支持SaaS"
+      },
+      {
+        "id": 7,
+        "name": "HTTP错误统计",
+        "description": "基于HTTP CODE统计"
+      },
+      {
+        "id": 8,
+        "name": "应用性能报表",
+        "description": "提供一周内的性能报表统计功能"
+      },
+      {
+        "id": 9,
+        "name": "SQL性能分析",
+        "description": "ORM性能分析"
+      },
+      {
+        "id": 10,
+        "name": "TPS统计",
+        "description": "分钟级别TPS统计"
+      },
+      {
+        "id": 11,
+        "name": "CPU使用统计",
+        "description": "分钟级CPU信息统计"
+      },
+      {
+        "id": 12,
+        "name": "线程Thread监控",
+        "description": "分钟级线程Thread监控"
+      }
+    ]
+  }
+]

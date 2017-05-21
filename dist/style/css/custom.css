@@ -1,0 +1,47 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    font-size: 13px;
+    line-height: 20px;
+    margin-top: 0;
+}
+
+.container-fixed-margin {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.grid-margin-clear {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.col-margin-clear {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 15px;
+    margin: 0;
+    line-height: 24px;
+}
+
+
+
+a {
+    color: #ff4081;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.m-b-15 {
+    margin-bottom: 15px
+}
