@@ -21,7 +21,7 @@ export default class SearchForm extends React.Component {
             page: 0,
             size: 10,
             sort: "createTime",
-            order: "ASC"
+            order: "DESC"
         };
     }
 

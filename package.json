@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack  --hot --progress --config webpack.config.js",
     "build-prod": "webpack --hot --progress --config webpack.config.prod.js",
-    "dev": "webpack-dev-server  --host 192.168.0.111 --content-base dist --config webpack.config.js --hot --inline --progress ",
+    "dev": "webpack-dev-server --host 192.168.0.111  --content-base dist --config webpack.config.js --hot --inline --progress ",
     "pro": "webpack-dev-server --content-base dist --config webpack.config.prod.js --hot --inline --progress ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

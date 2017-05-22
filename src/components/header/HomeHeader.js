@@ -5,10 +5,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {AppBar, Avatar, TextField} from 'material-ui';
+import IconButton from 'material-ui/IconButton';
 import {spacing, typography} from 'material-ui/styles';
 import {grey100, white, lightGreen200} from 'material-ui/styles/colors';
 import {Link} from 'react-router';
 import {Row, Col} from 'react-flexbox-grid';
+import SearchIcon from 'material-ui/svg-icons/action/search';
 import OnlineRightAppMenu from "./OnlineRightAppMenu";
 import LogoutRightAppMenu from "./LogoutRightAppMenu";
 
@@ -76,6 +78,9 @@ class HomeHeader extends React.Component {
             header: {
                 backgroundColor: lightGreen200
             },
+            searchIcon: {
+                marginTop: 0
+            },
             searchBox: {
                 container: {
                     marginLeft: 20,
@@ -107,7 +112,7 @@ class HomeHeader extends React.Component {
                         zDepth={0}
                         title={
                             <Row>
-                                <Col xs={12} sm={8} md={8} lg={3} style={styles.searchBox.container}>
+                                <Col xs={10} sm={8} md={8} lg={3} style={styles.searchBox.container}>
                                     <form onSubmit={this.handleSubmit.bind(this)}>
                                         <TextField
                                             hintText="搜索 ..."
@@ -119,6 +124,12 @@ class HomeHeader extends React.Component {
                                             underlineFocusStyle={styles.searchBox.underlineFocusStyle}
                                             onChange={this.handleKeywordChange.bind(this)}
                                         />
+                                        <IconButton
+                                            onTouchTap={this.handleSubmit.bind(this)}
+                                            style={styles.searchIcon}
+                                        >
+                                            <SearchIcon color={white}/>
+                                        </IconButton>
                                     </form>
                                 </Col>
                             </Row>

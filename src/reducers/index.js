@@ -7,6 +7,7 @@ import { combineReducers } from 'redux';
 import sessionReducer from './accounts';
 import searchReducer from './searchs';
 import resourcePostReducer from './resources';
+import registerReducer from './registers';
 
 import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from '../actions/actions';
 const { SHOW_ALL } = VisibilityFilters;
@@ -47,7 +48,8 @@ function todos(state = [], action) {
 const baseReducer = combineReducers({
     session: sessionReducer,
     searchState: searchReducer,
-    resourcePostState: resourcePostReducer
+    resourcePostState: resourcePostReducer,
+    registerState:registerReducer
 });
 
 export default baseReducer;

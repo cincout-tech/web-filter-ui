@@ -17,6 +17,8 @@ class Title extends React.Component {
 
     handleViewAction(resourceId) {
         const {session, actions, resource} = this.props;
+        console.log("handleViewAction");
+        console.log(session);
         if (!session.isLogin) {
             actions.viewAction({
                 accountId: null,

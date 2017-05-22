@@ -2,12 +2,15 @@
  * Created by zhaoyu on 17-1-20.
  */
 
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {browserHistory} from 'react-router';
-import {grey500, white, green200} from 'material-ui/styles/colors';
+import {grey500, white, green200, lightGreen400} from 'material-ui/styles/colors';
 
 import {Paper} from 'material-ui';
 import TextField from 'material-ui/TextField';
+import Snackbar from 'material-ui/Snackbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
 import FlatButton from 'material-ui/FlatButton';
@@ -22,21 +25,99 @@ class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
-            password: ""
+            registerVo: {
+                userName:"",
+                phoneNumber:"",
+                email: "",
+                password: ""
+            },
+            noticeSnackbar: {
+                open: false
+            }
         };
     }
+
+
+    handleUserNameChange(event) {
+        event.preventDefault();
+        this.setState({
+            registerVo: {
+                ...this.state.registerVo,
+                userName: event.target.value
+            }
+        });
+    }
+
+    handlePhoneNumberChange(event) {
+        event.preventDefault();
+        this.setState({
+            registerVo: {
+                ...this.state.registerVo,
+                phoneNumber: event.target.value
+            }
+        });
+    }
+
+    handleEmailChange(event) {
+        event.preventDefault();
+        this.setState({
+            registerVo: {
+                ...this.state.registerVo,
+                email: event.target.value
+            }
+        });
+    }
+
+    handlePasswordChange(event) {
+        event.preventDefault();
+        this.setState({
+            registerVo: {
+                ...this.state.registerVo,
+                password: event.target.value
+            }
+        });
+    }
+
     handleLoginClick() {
-        this.context.router.push("login");
+        this.context.router.push("/login");
+    }
+
+    handleRequestClose = () => {
+        this.setState({
+            noticeSnackbar: {
+                open: false
+            }
+        });
+        this.context.router.push("/login");
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {registerState} = nextProps;
+        if (registerState.isRegistered) {
+            this.setState({
+                noticeSnackbar: {
+                    open: true
+                }
+            });
+        }
     }
 
     handleSubmit(e) {
         e.preventDefault();
+        const {actions, session, registerState} = this.props;
+
+        let registerVo = {
+            ...this.state.registerVo
+        };
+        actions.register(registerVo);
         console.log("register action");
     }
 
     render() {
         const styles = {
+            registerFormContainer: {
+                marginTop: '4%'
+            },
             image: {
                 width:'auto',
                 height:100
@@ -48,24 +129,6 @@ class RegisterForm extends React.Component {
             flatButton: {
                 color: grey500
             },
-            checkRemember: {
-                style: {
-                    float: 'left',
-                    maxWidth: 180,
-                    paddingTop: 5
-                },
-                labelStyle: {
-                    color: grey500
-                },
-                iconStyle: {
-                    color: grey500,
-                    borderColor: grey500,
-                    fill: grey500
-                }
-            },
-            loginBtn: {
-                float: 'right'
-            },
             btn: {
                 background: '#4f81e9',
                 color: white,
@@ -74,18 +137,15 @@ class RegisterForm extends React.Component {
                 margin: 2,
                 fontSize: 13
             },
-            btnFacebook: {
-                background: '#4f81e9'
-            },
-            btnGoogle: {
-                background: '#e14441'
-            },
             btnSpan: {
                 marginLeft: 5
             },
+            snackbar: {
+                backgroundColor: lightGreen400
+            }
         };
         return (
-            <Grid fluid className="grid-margin-clear">
+            <Grid fluid className="grid-margin-clear" style={styles.registerFormContainer}>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
@@ -102,22 +162,30 @@ class RegisterForm extends React.Component {
                                 <Paper zDepth={0}>
                                     <form onSubmit={this.handleSubmit.bind(this)}>
                                         <TextField
+                                            floatingLabelText="昵称"
+                                            fullWidth={true}
+                                            value={this.state.registerVo.userName}
+                                            onChange={this.handleUserNameChange.bind(this)}
+                                        />
+                                        <TextField
                                             floatingLabelText="手机"
                                             fullWidth={true}
-                                            value={this.state.email}
+                                            value={this.state.registerVo.phoneNumber}
+                                            onChange={this.handlePhoneNumberChange.bind(this)}
                                         />
                                         <TextField
                                             floatingLabelText="邮箱"
                                             fullWidth={true}
-                                            value={this.state.email}
+                                            value={this.state.registerVo.email}
+                                            onChange={this.handleEmailChange.bind(this)}
                                         />
                                         <TextField
                                             floatingLabelText="密码"
                                             fullWidth={true}
                                             type="password"
-                                            value={this.state.password}
+                                            value={this.state.registerVo.password}
+                                            onChange={this.handlePasswordChange.bind(this)}
                                         />
-
                                         <div>
                                             <RaisedButton type="submit" label="注 册"
                                                           backgroundColor={green200}
@@ -154,12 +222,23 @@ class RegisterForm extends React.Component {
                         </Row>
                     </Col>
                 </Row>
+                <Row>
+                    <Col xs={12}>
+                        <Snackbar
+                            open={this.state.noticeSnackbar.open}
+                            message="用户注册成功"
+                            autoHideDuration={3000}
+                            bodyStyle={styles.snackbar}
+                            onRequestClose={this.handleRequestClose}
+                        />
+                    </Col>
+                </Row>
             </Grid>
         );
     }
 }
 
 RegisterForm.contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object
 };
 export default RegisterForm;

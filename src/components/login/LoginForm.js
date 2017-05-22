@@ -2,8 +2,9 @@
  * Created by zhaoyu on 17-1-20.
  */
 
-import React, {PropTypes} from 'react';
-import {browserHistory} from 'react-router';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {grey500, white, green200} from 'material-ui/styles/colors';
 
 import {Paper} from 'material-ui';
@@ -71,6 +72,9 @@ class LoginForm extends React.Component {
 
     render() {
         const styles = {
+            loginFormContainer: {
+                marginTop: '4%'
+            },
             image: {
                 width: 'auto',
                 height: 100
@@ -105,7 +109,7 @@ class LoginForm extends React.Component {
         const {actions, session} = this.props;
 
         return (
-            <Grid fluid className="grid-margin-clear">
+            <Grid fluid className="grid-margin-clear" style={styles.loginFormContainer}>
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
@@ -176,7 +180,7 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object
 };
 
 export default LoginForm;

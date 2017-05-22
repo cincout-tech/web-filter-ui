@@ -2,7 +2,12 @@
  * Created by zhaoyu on 17-5-20.
  */
 import React from 'react';
-import {IconButton, IconMenu, MenuItem,} from 'material-ui';
+import PropTypes from 'prop-types';
+
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import AppConfig from "../../../dist/data/AppConfig";
 
@@ -38,5 +43,5 @@ export default class LogoutRightAppMenu extends React.Component {
 }
 
 LogoutRightAppMenu.contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object
 };

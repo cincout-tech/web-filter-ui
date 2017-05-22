@@ -16,8 +16,6 @@ export function isLogging() {
     };
 }
 
-
-
 export const LOGIN_POST = "LOGIN_POST";
 export function loginPost(accountVo) {
     return {

@@ -8,7 +8,7 @@ import {Route, IndexRoute} from 'react-router';
 import AuthContainer from './containers/AuthContainer';
 import App from './components/App';
 
-import RegisterForm from './components/login/RegisterForm';
+import RegisterContainer from './containers/RegisterContainer';
 
 import ApplicationListPanel from './containers/ApplicationListPanel';
 import Dashboard from './containers/Dashboard';
@@ -29,7 +29,7 @@ export default (
         <IndexRoute component={SearchHome}/>
         <Route path={"resources"} component={ResourcesContainer}/>
         <Route path={"login"} component={LoginContainer}/>
-        <Route path="register" component={RegisterForm}/>
+        <Route path="register" component={RegisterContainer}/>
 
         <Route component={AuthContainer}>
             <Route path="dashboard" component={Dashboard}/>
