@@ -8,6 +8,9 @@ import sessionReducer from './accounts';
 import searchReducer from './searchs';
 import resourcePostReducer from './resources';
 import registerReducer from './registers';
+import statisticReducer from './statistics';
+
+import {reducer as reduxFormReducer} from 'redux-form'
 
 import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from '../actions/actions';
 const { SHOW_ALL } = VisibilityFilters;
@@ -49,7 +52,9 @@ const baseReducer = combineReducers({
     session: sessionReducer,
     searchState: searchReducer,
     resourcePostState: resourcePostReducer,
-    registerState:registerReducer
+    registerState:registerReducer,
+    statisticState: statisticReducer,
+    form: reduxFormReducer
 });
 
 export default baseReducer;

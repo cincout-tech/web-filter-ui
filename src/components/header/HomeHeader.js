@@ -14,7 +14,6 @@ import SearchIcon from 'material-ui/svg-icons/action/search';
 import OnlineRightAppMenu from "./OnlineRightAppMenu";
 import LogoutRightAppMenu from "./LogoutRightAppMenu";
 
-
 class HomeHeader extends React.Component {
     constructor(props) {
         super(props);
@@ -79,7 +78,9 @@ class HomeHeader extends React.Component {
                 backgroundColor: lightGreen200
             },
             searchIcon: {
-                marginTop: 0
+                marginTop: 0,
+                marginLeft:-15
+
             },
             searchBox: {
                 container: {

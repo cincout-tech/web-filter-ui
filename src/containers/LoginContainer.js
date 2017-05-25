@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import LoginForm from '../components/login/LoginForm';
-import { login } from '../actions/accounts';
+import { login, checkLogin } from '../actions/accounts';
 
 function mapStateToProps(state, newProps) {
     console.log(state);
@@ -16,7 +16,7 @@ function mapStateToProps(state, newProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators({login}, dispatch)};
+    return {actions: bindActionCreators({login, checkLogin}, dispatch)};
 }
 
 const LoginContainer = connect(

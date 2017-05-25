@@ -3,6 +3,8 @@
  */
 
 import fetch from 'isomorphic-fetch';
+import {isEmail, isPhoneNumber} from '../utils/Validate';
+import {SubmissionError} from 'redux-form'
 
 const LOGIN_ACTIONS = {
     LOGIN_REQUEST: "LOGIN_REQUEST",
@@ -40,9 +42,17 @@ export function loginFailure(msg) {
     };
 }
 
-export function login(accountVo) {
+export function login(loginVo) {
     return function (dispatch) {
-        dispatch(loginPost(accountVo));
+        dispatch(loginPost(loginVo));
+        let accountVo = {};
+        if (isEmail(loginVo.principal)) {
+            accountVo.email = loginVo.principal;
+        }
+        else if (isPhoneNumber(loginVo.principal)) {
+            accountVo.phoneNumber = loginVo.principal;
+        }
+        accountVo.password = loginVo.password;
 
         var options = {
             method: "POST",
@@ -54,7 +64,7 @@ export function login(accountVo) {
             },
             body: JSON.stringify(accountVo)
         };
-        fetch(`/api/login`, options)
+        return fetch(`/api/login`, options)
             .then(function (response) {
                 if (response.status != 200) {
                     console.log("error " + response.status);
@@ -66,7 +76,16 @@ export function login(accountVo) {
                     if (json.status == "OK") {
                         dispatch(receiveLoginPost(json.data));
                     } else {
-                        dispatch(loginFailure(json.msg.error));
+                        if (json.status == "NOT_FOUND") {
+                            return json.data;
+                        } else if (json.status == "BAD_REQUEST") {
+                            // ????
+                            throw new SubmissionError({
+                                password: 'error password',
+                                _error: 'error password!'
+                            })
+                        }
+                        //dispatch(loginFailure(json.msg.error));
                     }
 
                 });

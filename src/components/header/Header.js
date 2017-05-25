@@ -3,15 +3,7 @@
  */
 
 import React from 'react';
-import {
-    AppBar,
-    IconButton,
-    FlatButton,
-    RaisedButton,
-    IconMenu,
-    MenuItem
-
-} from 'material-ui';
+import AppBar from 'material-ui/AppBar';
 import {spacing, typography} from 'material-ui/styles';
 import {white, black, blue500, green200} from 'material-ui/styles/colors';
 import {Grid, Row, Col} from 'react-flexbox-grid';

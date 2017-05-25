@@ -1,14 +1,14 @@
 import React from 'react';
 import Assessment from 'material-ui/svg-icons/action/assessment';
-import GridOn from 'material-ui/svg-icons/image/grid-on';
-import PermIdentity from 'material-ui/svg-icons/action/perm-identity';
+import NoteAdd from 'material-ui/svg-icons/action/note-add';
+/*import PermIdentity from 'material-ui/svg-icons/action/perm-identity';
 import ViewList from 'material-ui/svg-icons/action/view-list';
 import Settings from 'material-ui/svg-icons/action/settings';
 import Web from 'material-ui/svg-icons/av/web';
 import {cyan600, pink600, purple600} from 'material-ui/styles/colors';
 import ExpandLess from 'material-ui/svg-icons/navigation/expand-less';
 import ExpandMore from 'material-ui/svg-icons/navigation/expand-more';
-import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
+import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';*/
 
 const data = {
     menus: [
@@ -17,7 +17,7 @@ const data = {
             icon: <Assessment/>,
             link: '/dashboard'
         },
-        {text: '添加资源', icon: <GridOn/>, link: '/resource'}
+        {text: '添加资源', icon: <NoteAdd/>, link: '/resource'}
         /*{
             text: '个人信息',
             icon: <PermIdentity/>,

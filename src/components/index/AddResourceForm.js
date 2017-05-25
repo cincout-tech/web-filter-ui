@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import HomeHeader from "../header/HomeHeader";
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
 import TextField from 'material-ui/TextField';
@@ -11,7 +10,6 @@ import Snackbar from 'material-ui/Snackbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import {lightGreen400} from 'material-ui/styles/colors';
-import Chip from 'material-ui/Chip';
 
 export default class AddResourceForm extends React.Component {
     constructor(props) {
@@ -169,10 +167,6 @@ export default class AddResourceForm extends React.Component {
             datePicker: {
                 width: '100%',
                 marginTop: 15
-            },
-
-            chip: {
-                margin: 4,
             },
             wrapper: {
                 display: 'flex',

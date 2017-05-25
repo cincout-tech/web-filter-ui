@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 
 import {browserHistory} from 'react-router';
 import {grey500, white, green200, lightGreen400} from 'material-ui/styles/colors';
+import {Field, reduxForm} from 'redux-form'
+import asyncValidate from './asyncValidate';
 
 import {Paper} from 'material-ui';
 import TextField from 'material-ui/TextField';
@@ -14,68 +16,55 @@ import Snackbar from 'material-ui/Snackbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
 import FlatButton from 'material-ui/FlatButton';
-import Checkbox from 'material-ui/Checkbox';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
 import {Grid, Row, Col} from 'react-flexbox-grid';
 import {Link} from 'react-router';
 
 
+const validate = (values) => {
+    const errors = {};
+    const requiredFields = ["userName", "phoneNumber", "email", "password"];
+    requiredFields.forEach(field => {
+       if (!values[field]) {
+           errors[field] = "不能为空";
+       }
+    });
+
+    if (values.userName && (values.userName.length > 18 || values.userName.length < 5)) {
+        errors.userName = `用户名必须在${5}到${18}个字符之间`;
+    }
+
+    if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = "邮箱格式错误";
+    }
+
+    if (values.phoneNumber && !/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/i.test(values.phoneNumber)) {
+        errors.phoneNumber = "手机号格式错误";
+    }
+    return errors
+}
+
+const renderTextField = ({input, label, type, meta: {asyncValidating, touched, error}, ...custom}) => (
+    <TextField
+        floatingLabelText={label}
+        fullWidth={true}
+        type={type}
+        errorText={touched && error}
+        {...input}
+        {...custom}
+    />
+)
+
 class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            registerVo: {
-                userName:"",
-                phoneNumber:"",
-                email: "",
-                password: ""
-            },
             noticeSnackbar: {
                 open: false
             }
         };
-    }
-
-
-    handleUserNameChange(event) {
-        event.preventDefault();
-        this.setState({
-            registerVo: {
-                ...this.state.registerVo,
-                userName: event.target.value
-            }
-        });
-    }
-
-    handlePhoneNumberChange(event) {
-        event.preventDefault();
-        this.setState({
-            registerVo: {
-                ...this.state.registerVo,
-                phoneNumber: event.target.value
-            }
-        });
-    }
-
-    handleEmailChange(event) {
-        event.preventDefault();
-        this.setState({
-            registerVo: {
-                ...this.state.registerVo,
-                email: event.target.value
-            }
-        });
-    }
-
-    handlePasswordChange(event) {
-        event.preventDefault();
-        this.setState({
-            registerVo: {
-                ...this.state.registerVo,
-                password: event.target.value
-            }
-        });
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleLoginClick() {
@@ -102,14 +91,10 @@ class RegisterForm extends React.Component {
         }
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    handleSubmit(values) {
         const {actions, session, registerState} = this.props;
 
-        let registerVo = {
-            ...this.state.registerVo
-        };
-        actions.register(registerVo);
+        actions.register(values);
         console.log("register action");
     }
 
@@ -144,6 +129,9 @@ class RegisterForm extends React.Component {
                 backgroundColor: lightGreen400
             }
         };
+
+        const {handleSubmit, pristine, reset, submitting} = this.props;
+
         return (
             <Grid fluid className="grid-margin-clear" style={styles.registerFormContainer}>
                 <Row>
@@ -160,36 +148,16 @@ class RegisterForm extends React.Component {
                         <Row center="xs">
                             <Col xs={12} sm={8} md={6} lg={3}>
                                 <Paper zDepth={0}>
-                                    <form onSubmit={this.handleSubmit.bind(this)}>
-                                        <TextField
-                                            floatingLabelText="昵称"
-                                            fullWidth={true}
-                                            value={this.state.registerVo.userName}
-                                            onChange={this.handleUserNameChange.bind(this)}
-                                        />
-                                        <TextField
-                                            floatingLabelText="手机"
-                                            fullWidth={true}
-                                            value={this.state.registerVo.phoneNumber}
-                                            onChange={this.handlePhoneNumberChange.bind(this)}
-                                        />
-                                        <TextField
-                                            floatingLabelText="邮箱"
-                                            fullWidth={true}
-                                            value={this.state.registerVo.email}
-                                            onChange={this.handleEmailChange.bind(this)}
-                                        />
-                                        <TextField
-                                            floatingLabelText="密码"
-                                            fullWidth={true}
-                                            type="password"
-                                            value={this.state.registerVo.password}
-                                            onChange={this.handlePasswordChange.bind(this)}
-                                        />
+                                    <form onSubmit={handleSubmit(this.handleSubmit)}>
+                                        <Field name="userName" type="text" component={renderTextField} label="昵称"/>
+                                        <Field name="phoneNumber" type="text" component={renderTextField} label="手机号"/>
+                                        <Field name="email" type="text" component={renderTextField} label="邮箱"/>
+                                        <Field name="password" type="password" component={renderTextField} label="密码"/>
                                         <div>
                                             <RaisedButton type="submit" label="注 册"
                                                           backgroundColor={green200}
                                                           labelColor={white}
+                                                          disabled={submitting}
                                                           />
 
                                         </div>
@@ -241,4 +209,9 @@ class RegisterForm extends React.Component {
 RegisterForm.contextTypes = {
     router: PropTypes.object
 };
-export default RegisterForm;
+export default reduxForm({
+    form: "registerForm",
+    validate,
+    asyncValidate,
+    asyncBlurFields: ["userName", "phoneNumber", "email"]
+})(RegisterForm);

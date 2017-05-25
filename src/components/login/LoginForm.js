@@ -12,19 +12,46 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
 import FlatButton from 'material-ui/FlatButton';
-import Checkbox from 'material-ui/Checkbox';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
 import {Grid, Row, Col} from 'react-flexbox-grid';
 import {Link} from 'react-router';
+import asyncValidate from "./asyncValidate";
+
+import {Field, reduxForm} from 'redux-form'
+import submit from './submit';
+
+const validate = (values) => {
+    const errors = {};
+    const requiredFields = ["principal", "password"];
+    requiredFields.forEach(field => {
+        if (!values[field]) {
+            errors[field] = "不能为空";
+        }
+    });
+
+    if (values.principal && !/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/i.test(values.principal)
+        && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.principal)) {
+        errors.principal = "手机号或邮箱格式错误";
+    }
+    return errors
+}
+
+const renderTextField = ({input, label, type, meta: {touched, error}, ...custom}) => (
+    <TextField
+        floatingLabelText={label}
+        fullWidth={true}
+        errorText={touched && error}
+        type={type}
+        {...input}
+        {...custom}
+    />
+)
 
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            email: "",
-            password: ""
-        };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentWillMount() {
@@ -32,7 +59,7 @@ class LoginForm extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        const { session } = newProps;
+        const {session} = newProps;
         console.log("LoginForm componentWillReceiveProps");
         if (session.isLogin) {
             this.context.router.push("dashboard");
@@ -41,33 +68,16 @@ class LoginForm extends React.Component {
         }
     }
 
-    handleUserNameChange(event) {
-        this.setState({
-            email: event.target.value
-        });
-    }
-
-    handlePasswordChange(event) {
-        this.setState({
-            password: event.target.value
-        });
-    }
-
     handleRegisterClick() {
         this.context.router.push("register");
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    handleSubmit(values) {
         console.log("login action");
-        const {actions, session} = this.props;
-        console.log(session);
-        var accountVo = {
-            email: this.state.email,
-            password: this.state.password
-        };
-        actions.login(accountVo);
+        const {actions, session, dispatch} = this.props;
+
         console.log("submit...");
+        return submit(values, dispatch);
     }
 
     render() {
@@ -85,28 +95,10 @@ class LoginForm extends React.Component {
             },
             flatButton: {
                 color: grey500
-            },
-            checkRemember: {
-                style: {
-                    float: 'left',
-                    maxWidth: 180,
-                    paddingTop: 5
-                },
-                labelStyle: {
-                    color: grey500
-                },
-                iconStyle: {
-                    color: grey500,
-                    borderColor: grey500,
-                    fill: grey500
-                }
-            },
-            loginBtn: {
-                float: 'right'
             }
         };
 
-        const {actions, session} = this.props;
+        const {actions, session, handleSubmit, pristine, reset, submitting, error} = this.props;
 
         return (
             <Grid fluid className="grid-margin-clear" style={styles.loginFormContainer}>
@@ -124,25 +116,15 @@ class LoginForm extends React.Component {
                         <Row center="xs">
                             <Col xs={12} sm={8} md={6} lg={3}>
                                 <Paper zDepth={0}>
-                                    <form onSubmit={this.handleSubmit.bind(this)}>
-                                        <TextField
-                                            floatingLabelText="邮箱/手机"
-                                            fullWidth={true}
-                                            value={this.state.email}
-                                            onChange={this.handleUserNameChange.bind(this)}
-                                        />
-                                        <TextField
-                                            floatingLabelText="密码"
-                                            fullWidth={true}
-                                            type="password"
-                                            value={this.state.password}
-                                            onChange={this.handlePasswordChange.bind(this)}
-                                        />
-
+                                    <form onSubmit={handleSubmit(this.handleSubmit)}>
+                                        <Field name="principal" type="text" component={renderTextField} label="邮箱/手机"/>
+                                        <Field name="password" type="password" component={renderTextField} label="密码"/>
                                         <div>
                                             <RaisedButton type="submit" label="登 录"
                                                           backgroundColor={green200}
-                                                          labelColor={white}/>
+                                                          labelColor={white}
+                                                          disabled={submitting}
+                                            />
 
                                         </div>
                                     </form>
@@ -154,7 +136,7 @@ class LoginForm extends React.Component {
                 <Row>
                     <Col xs={12}>
                         <Row center="xs">
-                            <Col xs={6} >
+                            <Col xs={6}>
                                 <div style={styles.buttonsDiv}>
                                     <FlatButton
                                         label="注册"
@@ -183,4 +165,7 @@ LoginForm.contextTypes = {
     router: PropTypes.object
 };
 
-export default LoginForm;
+export default reduxForm({
+    form: "loginForm",
+    validate
+})(LoginForm);

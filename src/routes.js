@@ -11,7 +11,7 @@ import App from './components/App';
 import RegisterContainer from './containers/RegisterContainer';
 
 import ApplicationListPanel from './containers/ApplicationListPanel';
-import Dashboard from './containers/Dashboard';
+import DashboardContainer from './containers/DashboardContainer';
 import PersonInfo from './components/person/PersonInfo';
 import Configuration from './components/config/Configuration';
 
@@ -32,7 +32,7 @@ export default (
         <Route path="register" component={RegisterContainer}/>
 
         <Route component={AuthContainer}>
-            <Route path="dashboard" component={Dashboard}/>
+            <Route path="dashboard" component={DashboardContainer}/>
             <Route path="resource" component={ResourceFormContainer}/>
             <Route path="info" component={PersonInfo}/>
             <Route path={"settings"} component={Configuration}/>

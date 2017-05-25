@@ -5,8 +5,9 @@
 import React from 'react';
 
 
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'react-flexbox-grid';
 import ResourceList from "./ResourceList";
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 import HomeHeader from "../header/HomeHeader";
 import Pagination from "./Pagination";
 
@@ -26,7 +27,16 @@ export default class ResourcePanel extends React.Component {
     render() {
         const {searchState, session, actions} = this.props;
         if (searchState.isSearching) {
-            return (<div>Loading... </div>);
+            return (
+                <div>
+                    <RefreshIndicator
+                        top={10}
+                        left={20}
+                        size={50}
+                        loadingColor="#FF9800"
+                        status="loading"
+                    />
+                </div>);
         }
         if (searchState.isSearched) {
             return (
@@ -38,7 +48,7 @@ export default class ResourcePanel extends React.Component {
             );
         }
         return (
-            <div>fuck</div>
+            <div></div>
         );
     }
 }

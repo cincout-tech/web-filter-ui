@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack  --hot --progress --config webpack.config.js",
     "build-prod": "webpack --hot --progress --config webpack.config.prod.js",
-    "dev": "webpack-dev-server --host 192.168.0.111  --content-base dist --config webpack.config.js --hot --inline --progress ",
+    "dev": "webpack-dev-server --content-base dist --config webpack.config.js --hot --inline --progress ",
+    "dev-home": "webpack-dev-server --host 192.168.0.111  --content-base dist --config webpack.config.js --hot --inline --progress ",
     "pro": "webpack-dev-server --content-base dist --config webpack.config.prod.js --hot --inline --progress ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -36,6 +37,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-actions": "^2.0.1",
+    "redux-form": "^6.7.0",
     "redux-logger": "^2.8.1",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",

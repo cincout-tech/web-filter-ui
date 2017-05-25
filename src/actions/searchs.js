@@ -3,6 +3,7 @@
  */
 
 import fetch from 'isomorphic-fetch';
+import {queryParams} from './utils';
 
 export const SEARCH_ACTIONS = {
     SEARCH_REQUEST: "SEARCH_REQUEST",
@@ -11,11 +12,7 @@ export const SEARCH_ACTIONS = {
 };
 
 
-function queryParams(params) {
-    return Object.keys(params)
-        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-        .join('&');
-}
+
 
 export function searchPost(queryData) {
     return {
